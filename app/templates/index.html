@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Chat | Flask-SocketIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea, #764ba2, #6d83f2);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 1.2rem;
+      padding: 2.5rem 3rem;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    label {
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 0.7rem;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    input:focus {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+    }
+
+    button {
+      background: #fff;
+      color: #6d83f2;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 0.7rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #6d83f2;
+      color: #fff;
+    }
+
+    small {
+      color: #ffcccc;
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💬 Flask Chat</h1>
+    <p>Join a room and start chatting instantly!</p>
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div>
+        <label>{{ form.name.label }}</label>
+        {{ form.name(size=32, placeholder="Enter your name") }}
+        {% for error in form.name.errors %}
+          <small>{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div>
+        <label>{{ form.room.label }}</label>
+        {{ form.room(size=32, placeholder="Enter a room name") }}
+        {% for error in form.room.errors %}
+          <small>{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      {{ form.submit(class_="btn") }}
+    </form>
+  </div>
+
+  <footer>Made with ❤️ using Flask-SocketIO</footer>
+</body>
+</html>
+
